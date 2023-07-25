@@ -1,7 +1,7 @@
 # Project North (Outskirts of Humanity)
 
 ### Concept
-A single player PvE survival game about a person who travels to the far reaches of the Alaskan north. They have to hunt, gather and grow their food. Create and mend clothing. Build and repair their cabin and find a way to make money selling the items they collect.
+A single player PvE survival game about a person who travels to the far reaches of the Canadian wilderness. They have to hunt, gather and grow their food. Create and mend clothing. Build and repair their cabin and find a way to make money selling the items they collect.
 
 ### Mechanics
 The player is visited by a ski-plane once a week, the plane takes goods to sell, and brings goods back to the player. The plane comes on Thursdays, the player has to place thier order for goods and send items to be sold at the same time. Goods sent out on a thursday will not be sold until friday. Orders placed by the player will be verified and purchased, stock is not always guarenteed.
