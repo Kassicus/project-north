@@ -17,3 +17,5 @@ delta_time = 0
 framerate = 120
 
 events = None
+
+global_offset = pygame.math.Vector2()

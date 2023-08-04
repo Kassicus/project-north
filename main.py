@@ -1,6 +1,7 @@
 import pygame
 
 import gl
+import world
 
 pygame.init()
 
@@ -11,6 +12,8 @@ class Game():
 
         self.running = True
         self.clock = pygame.time.Clock()
+
+        self.world = world.World()
 
     def start(self):
         while self.running:
@@ -28,7 +31,11 @@ class Game():
     def draw(self):
         self.screen.fill(gl.color.black)
 
+        self.world.draw()
+
     def update(self):
+        self.world.update()
+
         pygame.display.update()
         gl.delta_time = self.clock.tick(gl.framerate) / 1000
 
