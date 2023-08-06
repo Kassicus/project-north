@@ -60,10 +60,20 @@ class RawOakLog(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(x, y)
         self.world_ref = world
 
-        self.image = pygame.Surface([30, 60])
+        self.image = pygame.Surface([60, 30])
         self.image.fill(gl.color.red)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
 
     def update(self):
-        pass
+        mouse_x, mouse_y = pygame.mouse.get_pos() + gl.global_offset
+
+        if self.rect.left < mouse_x < self.rect.right:
+            if self.rect.top < mouse_y < self.rect.bottom:
+                if pygame.mouse.get_pressed()[0]:
+                    self.destroy()
+
+    def destroy(self):
+        if self.world_ref.player_inventory.has_space():
+            self.world_ref.player_inventory.add("raw_oak_log", 1)
+            self.kill()

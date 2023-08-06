@@ -1,17 +1,30 @@
 import pygame
 
 import gl
+import loader
 import player
 import camera
 import tree
+import inventory
+
+
 
 class World():
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
-        self.world_background = pygame.image.load("assets/test.png").convert_alpha()
 
-        self.camera = camera.PlayerCenterCamera(self.display_surface, self.world_background)
+        self.background_images = {
+            "overflow": pygame.image.load("assets/backgrounds/overflow.png").convert_alpha(),
+            "test": pygame.image.load("assets/test.png").convert_alpha()
+        }
+
+        self.item_images = {
+            "raw_oak_log": pygame.image.load("assets/items/raw_oak_log.png").convert_alpha()
+        }
+
+        self.camera = camera.PlayerCenterCamera(self.display_surface, self.background_images["test"])
         self.player = player.Player()
+        self.player_inventory = inventory.UIInventory(100, 900, self)
 
         self.collidables = pygame.sprite.Group()
         self.tree_container = pygame.sprite.Group()
@@ -47,9 +60,11 @@ class World():
 
     def draw(self):
         self.camera.camera_draw(self.player)
+        self.player_inventory.draw(self.display_surface)
 
     def update(self):
         self.camera.update()
+        self.player_inventory.update()
         self.tree_container.update()
         self.felled_tree_container.update()
         self.log_container.update()
