@@ -2,6 +2,7 @@ import pygame
 
 import gl
 import world
+import debug
 
 pygame.init()
 
@@ -14,6 +15,8 @@ class Game():
         self.clock = pygame.time.Clock()
 
         self.world = world.World()
+
+        self.debug_interface = debug.DebugInterface()
 
     def start(self):
         while self.running:
@@ -28,13 +31,22 @@ class Game():
             if event.type == pygame.QUIT:
                 self.running = False
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_TAB:
+                    self.debug_interface.toggle_active()
+
     def draw(self):
         self.screen.fill(gl.color.black)
 
         self.world.draw()
 
+        if self.debug_interface.active:
+            self.debug_interface.draw()
+
     def update(self):
         self.world.update()
+
+        self.debug_interface.update(self.clock, self.world.player)
 
         pygame.display.update()
         gl.delta_time = self.clock.tick(gl.framerate) / 1000
