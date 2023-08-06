@@ -35,3 +35,11 @@ class World():
     def update(self):
         self.camera.update()
         self.tree_container.update()
+
+        for event in gl.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos() + gl.global_offset
+                for tree in self.tree_container:
+                    if tree.pos.x < mouse_x < tree.pos.x + tree.rect.width:
+                        if tree.pos.y < mouse_y < tree.pos.y + tree.rect.height:
+                            tree.health -= 1
