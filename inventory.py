@@ -1,6 +1,7 @@
 import pygame
 
 import gl
+import loader
 
 class UIInventory():
     def __init__(self, x: int, y: int, world: object):
@@ -70,7 +71,7 @@ class UISlot(pygame.sprite.Sprite):
 
     def display_item(self):
         if self.item != None:
-            self.item_image = self.world_ref.item_images[self.item]
+            self.item_image = loader.items[self.item]
             count = self.font.render(str(self.count), True, gl.color.black)
 
             self.display_surface.blit(self.item_image, (self.rect.centerx - self.item_image.get_width() / 2, self.rect.centery - self.item_image.get_height() / 2))

@@ -1,6 +1,7 @@
 import pygame
 
 import gl
+import loader
 import world
 import debug
 
@@ -10,6 +11,8 @@ class Game():
     def __init__(self):
         self.screen = pygame.display.set_mode([gl.SCREEN_WIDTH, gl.SCREEN_HEIGHT])
         pygame.display.set_caption("Project North")
+
+        loader.load_images()
 
         self.running = True
         self.clock = pygame.time.Clock()

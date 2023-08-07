@@ -5,23 +5,13 @@ import player
 import camera
 import tree
 import inventory
-
-
+import loader
 
 class World():
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
 
-        self.background_images = {
-            "overflow": pygame.image.load("assets/backgrounds/overflow.png").convert_alpha(),
-            "test": pygame.image.load("assets/test.png").convert_alpha()
-        }
-
-        self.item_images = {
-            "raw_log": pygame.image.load("assets/items/raw_log.png").convert_alpha()
-        }
-
-        self.camera = camera.PlayerCenterCamera(self.display_surface, self.background_images["test"])
+        self.camera = camera.PlayerCenterCamera(self.display_surface, loader.backgrounds["test"])
         self.player = player.Player()
         self.player_inventory = inventory.UIInventory(363, 900, self)
 
