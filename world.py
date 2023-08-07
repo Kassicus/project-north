@@ -1,7 +1,6 @@
 import pygame
 
 import gl
-import loader
 import player
 import camera
 import tree
@@ -19,7 +18,7 @@ class World():
         }
 
         self.item_images = {
-            "raw_oak_log": pygame.image.load("assets/items/raw_oak_log.png").convert_alpha()
+            "raw_log": pygame.image.load("assets/items/raw_log.png").convert_alpha()
         }
 
         self.camera = camera.PlayerCenterCamera(self.display_surface, self.background_images["test"])
@@ -39,7 +38,7 @@ class World():
 
     def create_trees(self, tree_array: list):
         for point_array in range(len(tree_array)):
-            t = tree.OakTree(tree_array[point_array][0], tree_array[point_array][1], self)
+            t = tree.Tree(tree_array[point_array][0], tree_array[point_array][1], self)
             self.camera.add(t)
             self.tree_container.add(t)
             self.collidables.add(t)
@@ -72,6 +71,5 @@ class World():
         for event in gl.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    print("click")
                     self.check_trees_hit()
                     self.check_felled_trees_hit()

@@ -1,7 +1,6 @@
 import pygame
 
 import gl
-import loader
 
 class UIInventory():
     def __init__(self, x: int, y: int, world: object):
@@ -21,17 +20,22 @@ class UIInventory():
         else:
             return False
         
-    def add(self, item_name, item_count):
-        if self.left_slot.item == None:
-            self.left_slot.item = item_name
-            self.left_slot.count = item_count
-        elif self.middle_slot.item == None:
-            self.middle_slot.item = item_name
-            self.middle_slot.count = item_count
-        elif self.right_slot.item == None:
-            self.right_slot.item = item_name
-            self.right_slot.count = item_count
-    
+    def add(self, item_name, item_count, item_ref):
+        added = False
+
+        for slot in self.slots:
+            if added == False:
+                if slot.item == item_name:
+                    slot.count += 1
+                    item_ref.kill()
+                    added = True
+                elif slot.item == None:
+                    slot.item = item_name
+                    slot.count = item_count
+                    item_ref.kill()
+                    added = True
+                else:
+                    print("Cannot be picked up")
 
     def draw(self, surface):
         self.slots.draw(surface)
@@ -45,6 +49,8 @@ class UISlot(pygame.sprite.Sprite):
 
         self.pos = pygame.math.Vector2(x, y)
         self.display_surface = pygame.display.get_surface()
+
+        self.font = pygame.font.SysFont("Courier", 20)
 
         self.item = None
         self.count = 0
@@ -65,8 +71,10 @@ class UISlot(pygame.sprite.Sprite):
     def display_item(self):
         if self.item != None:
             self.item_image = self.world_ref.item_images[self.item]
+            count = self.font.render(str(self.count), True, gl.color.black)
 
-            self.display_surface.blit(self.item_image, (self.pos.x, self.pos.y))
+            self.display_surface.blit(self.item_image, (self.rect.centerx - self.item_image.get_width() / 2, self.rect.centery - self.item_image.get_height() / 2))
+            self.display_surface.blit(count, (self.rect.right - count.get_width() - 5, self.rect.top + 5))
 
     def check_highlight(self):
         mouse_x, mouse_y = pygame.mouse.get_pos()
