@@ -23,7 +23,7 @@ class World():
 
         self.camera = camera.PlayerCenterCamera(self.display_surface, self.background_images["test"])
         self.player = player.Player()
-        self.player_inventory = inventory.UIInventory(100, 900, self)
+        self.player_inventory = inventory.UIInventory(363, 900, self)
 
         self.collidables = pygame.sprite.Group()
         self.tree_container = pygame.sprite.Group()
