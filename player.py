@@ -18,7 +18,6 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.pos += self.vel * gl.delta_time
-        self.pos = round(self.pos)
         self.rect.center = self.pos
 
         self.move()

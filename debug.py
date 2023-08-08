@@ -41,7 +41,7 @@ class DebugInterface():
         return text, offset
     
     def get_player_pos(self, player: pygame.sprite.Sprite):
-        string = "Player: " + str(player.pos.x) + " " + str(player.pos.y)
+        string = "Player: " + str(round(player.pos.x)) + " " + str(round(player.pos.y))
         text = self.font.render(string, True, gl.color.yellow)
 
         offset = int(gl.SCREEN_WIDTH - text.get_width() - 10)
